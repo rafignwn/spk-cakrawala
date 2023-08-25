@@ -1,0 +1,70 @@
+{
+  "name": "cakrawala-app",
+  "private": true,
+  "version": "0.0.1",
+  "main": "public/electron.js",
+  "homepage": "./",
+  "icon": "public/sunset.png",
+  "description": "Aplikasi pesanan percetakan cakrawala",
+  "author": {
+    "name": "Rafi gunawan",
+    "email": "rafigun746@gmail.com"
+  },
+  "type": "commonjs",
+  "scripts": {
+    "dev:web": "vite",
+    "build:web": "tsc && vite build",
+    "build:app": "electron-packager ./dist cakrawala-app",
+    "postbuild": "sed -i 's|<head>|<head><base href=\"./\">|' dist/index.html",
+    "build:desktop": "tsc -p electron/tsconfig.json",
+    "dev:desktop": "yarn run build:desktop && electron ./dist/electron.js",
+    "start:desktop": "electron ./public/electron.js",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "package": "electron-builder build -w --publish never"
+  },
+  "dependencies": {
+    "@icon-park/react": "^1.4.2",
+    "electron-router-dom": "^1.0.5",
+    "react": "^18.2.0",
+    "react-data-table-component": "^7.5.3",
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
+    "react-router-dom": "^6.14.1",
+    "styled-components": "^6.0.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "@vitejs/plugin-react-swc": "^3.0.0",
+    "autoprefixer": "^10.4.14",
+    "electron": "21.0.0",
+    "electron-builder": "^24.4.0",
+    "electron-packager": "^17.1.1",
+    "eslint": "^8.38.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "postcss": "^8.4.26",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.9"
+  },
+  "build": {
+    "compression": "maximum",
+    "appId": "com.electron.cakrawala",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "icon": "public/sunset.png"
+    }
+  }
+}
